@@ -2,6 +2,11 @@ import json
 import boto3
 import time
 from pricing import ANTHROPIC_PRICING
+from sns_utils import send_cost_alert
+
+COST_THRESHOLD = 100  # 设置费用阈值,单位为美元
+SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:342367142984:cost-alert' #SNS 主题  
+
 
 def get_token_price(model_id, token_type, region):
     if region in ANTHROPIC_PRICING and model_id in ANTHROPIC_PRICING[region]:
@@ -70,5 +75,9 @@ def lambda_handler(event, context):
             record.append({'field': 'outputTokenCost', 'value': 'None'})  
             record.append({'field': 'totalCost', 'value': 'None'})
             print(record)
+    
+    ##发送告警邮件 
+    send_cost_alert(total_cost, COST_THRESHOLD, SNS_TOPIC_ARN)
+
     
     return response['results']
