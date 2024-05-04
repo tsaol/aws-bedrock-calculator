@@ -1,5 +1,5 @@
 # bedrock-calculator
-本方案旨在助您高效构建Bedrock监控体系,实现对Bedrock多IAM用户场景的无感知、低成本追踪与精细管控。
+本方案旨在助您高效构建Bedrock Token的监控体系,实现对Bedrock中不同的模型、不同IAM用户的的Token用量进行统计的解决方案。
 * 无服务器架构
 * 对每一个IAM用户进行监控
 * 根据企业需求灵活调整监控频率与窗口期
